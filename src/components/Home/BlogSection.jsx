@@ -1,4 +1,4 @@
-export default function Blog() {
+export default function BlogSection() {
   return (
     <>
       <section className="mx-auto max-w-screen-xl px-4 sm:px-6 py-10 sm:py-12 lg:px-8 lg:py-40">
