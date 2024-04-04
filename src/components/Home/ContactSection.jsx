@@ -1,4 +1,4 @@
-export default function Contact() {
+export default function ContactSection() {
   return (
     <>
       <section className="bg-gray-100">
