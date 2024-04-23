@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import Tag from "./Tag";
+import Loader from "../Loader";
 
 export default function SingleBlogPage() {
   const { id } = useParams();
@@ -12,13 +13,7 @@ export default function SingleBlogPage() {
   } = useFetch(`${import.meta.env.VITE_APP_URL}/api/blogs/${id}?populate=*`);
 
   if (loading) {
-    return (
-      <div className="max-w-6xl text-center mx-auto py-40">
-        <h2 className="text-center text-xl text-indigo-400 uppercase">
-          loading...
-        </h2>
-      </div>
-    );
+    return <Loader />;
   }
 
   if (error) {
