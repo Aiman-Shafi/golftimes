@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Notfound from "./pages/Notfound";
 import Service from "./pages/Service";
 import Contact from "./pages/Contact";
+import SingleBlogPage from "./components/Blog/SingleBlogPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/service" element={<Service />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<SingleBlogPage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/*" element={<Notfound />} />
       </Routes>
