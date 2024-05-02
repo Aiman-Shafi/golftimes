@@ -2,11 +2,13 @@ import { useState } from "react";
 import { CartState } from "../context/Context";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+// import { useNavigation } from "react-router-dom";
 
 export default function Checkout() {
   const VAT = 20;
   const { cart } = CartState();
-  //   console.log(cart);
+  console.log("state cart", cart);
+  // const navigate = useNavigation();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -37,9 +39,9 @@ export default function Checkout() {
         customer_email: formData.email,
         order_notes: formData.notes,
         payment_method: formData.paymentMethod,
-        service_name: formData.serviceName,
-        package_type: formData.packageType,
-        price: formData.price,
+        service_name: cart[0].service_name,
+        package_type: cart[0].package_type,
+        price: cart[0].price,
       },
     };
 
@@ -68,6 +70,8 @@ export default function Checkout() {
         toast.error("Something went wrong! Please try again later");
         console.error(error);
       });
+
+    // navigate("/thank-you");
   };
 
   return (
@@ -230,7 +234,9 @@ export default function Checkout() {
           </div>
         </div>
         {/* Checkout Form  */}
-        {cart.length !== 0 ? (
+        {cart.length === 0 || !cart[0] ? (
+          ""
+        ) : (
           <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-lg">
               <div className="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
@@ -306,7 +312,7 @@ export default function Checkout() {
                   </div>
 
                   <label
-                    htmlFor="Option1"
+                    htmlFor="paymentMethod"
                     className="flex cursor-pointer items-start gap-4 rounded-lg border border-gray-200 p-4 transition hover:bg-gray-50"
                   >
                     <div className="flex items-center">
@@ -316,9 +322,8 @@ export default function Checkout() {
                         required
                         value={"Make Payment Later"}
                         className="size-4 rounded border-gray-300"
-                        id="Option1"
+                        id="paymentMethod"
                         name="paymentMethod"
-                        onChange={handleChange}
                       />
                     </div>
 
@@ -360,22 +365,15 @@ export default function Checkout() {
 
                   <input
                     type="text"
-                    hidden
                     name="serviceName"
                     value={cart[0].service_name}
                   />
                   <input
                     type="text"
-                    hidden
                     name="packageType"
                     value={cart[0].package_type}
                   />
-                  <input
-                    type="text"
-                    hidden
-                    name="price"
-                    value={cart[0].price + VAT}
-                  />
+                  <input type="text" name="price" value={cart[0].price + VAT} />
 
                   <div className="mt-4">
                     <button
@@ -389,8 +387,6 @@ export default function Checkout() {
               </div>
             </div>
           </div>
-        ) : (
-          ""
         )}
       </div>
     </section>

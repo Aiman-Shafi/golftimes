@@ -1,10 +1,9 @@
-import { useEffect } from "react";
 import { CartState } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 export default function PricingCard({ service }) {
-  const { cart, setCart } = CartState();
+  const { setCart } = CartState();
   const navigate = useNavigate();
 
   // data from api
@@ -12,7 +11,7 @@ export default function PricingCard({ service }) {
   let features = data.features.split("\n");
 
   const addtoCart = () => {
-    setCart([...cart, data]);
+    setCart([data]);
     navigate("/checkout");
   };
 
