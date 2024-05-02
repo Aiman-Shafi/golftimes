@@ -9,21 +9,28 @@ import Notfound from "./pages/Notfound";
 import Service from "./pages/Service";
 import Contact from "./pages/Contact";
 import SingleBlogPage from "./components/Blog/SingleBlogPage";
+import Context from "./context/Context";
+import Checkout from "./pages/Checkout";
+import ThankYou from "./pages/ThankYou";
 
 function App() {
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/service" element={<Service />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:id" element={<SingleBlogPage />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/*" element={<Notfound />} />
-      </Routes>
-      <Footer />
+      <Context>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/service" element={<Service />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<SingleBlogPage />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/*" element={<Notfound />} />
+        </Routes>
+        <Footer />
+      </Context>
     </>
   );
 }

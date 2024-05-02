@@ -15,7 +15,7 @@ export default function useFetch(url) {
             Authorization: `bearer ${import.meta.env.VITE_APP_API_TOKEN}`,
           },
         });
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setData(response.data.data);
       } catch (err) {
         console.log(err);
