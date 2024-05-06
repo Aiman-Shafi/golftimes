@@ -1,9 +1,21 @@
+import { CartState } from "../../context/Context";
+import { useNavigate } from "react-router-dom";
+
 /* eslint-disable react/prop-types */
 export default function PricingCard({ service }) {
+  const { setCart } = CartState();
+  const navigate = useNavigate();
+
+  // data from api
   let data = service.attributes;
-  //   console.log(data);
   let features = data.features.split("\n");
-  console.log(features);
+
+  const addtoCart = () => {
+    setCart([data]);
+    navigate("/checkout");
+  };
+
+  // console.log(features);
   return (
     <div className="divide-y divide-gray-200 rounded-2xl border border-gray-200 shadow-sm">
       <div className="p-6 sm:px-8">
@@ -25,12 +37,12 @@ export default function PricingCard({ service }) {
           <span className="text-sm font-medium text-gray-700">/year</span>
         </p>
 
-        <a
+        <button
           className="mt-4 block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500 sm:mt-6"
-          href="#"
+          onClick={addtoCart}
         >
           Get Started
-        </a>
+        </button>
       </div>
 
       <div className="p-6 sm:px-8">

@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { CartState } from "../../context/Context";
 
 export default function Header() {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
-
+  const { cart } = CartState();
   return (
     <>
       <header className="border-b-1 relative z-20 w-full border-b border-slate-200 bg-white/90 shadow-lg shadow-slate-700/5 after:absolute after:top-full after:left-0 after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-sm lg:after:hidden">
@@ -139,10 +141,41 @@ export default function Header() {
                 </NavLink>
               </li>
             </ul>
+            <CartIcon cart={cart} />
           </nav>
         </div>
       </header>
       {/*<!-- End Basic Navbar--> */}
+    </>
+  );
+}
+
+function CartIcon({ cart }) {
+  return (
+    <>
+      <a
+        href="#"
+        className="relative inline-flex h-12 w-12 items-center justify-center rounded bg-indigo-500 text-lg text-white mt-6"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+          />
+        </svg>
+        <span className="absolute -top-2.5 -right-2.5 inline-flex items-center justify-center gap-1 rounded-full border-2 border-white bg-pink-500 px-1.5 text-sm text-white">
+          {cart.length}
+          <span className="sr-only"> new emails </span>
+        </span>
+      </a>
     </>
   );
 }

@@ -7,6 +7,8 @@ export default function Service() {
     `${import.meta.env.VITE_APP_URL}/api/services?populate=*`
   );
 
+  console.log(services);
+
   if (loading) {
     return <Loader />;
   }
